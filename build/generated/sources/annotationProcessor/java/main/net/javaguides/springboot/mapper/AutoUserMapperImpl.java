@@ -6,7 +6,7 @@ import net.javaguides.springboot.entity.User;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-19T11:45:20-0600",
+    date = "2024-07-19T12:23:16-0600",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 17.0.11 (Oracle Corporation)"
 )
 public class AutoUserMapperImpl implements AutoUserMapper {
