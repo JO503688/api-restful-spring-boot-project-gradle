@@ -6,7 +6,7 @@ import net.javaguides.springboot.entity.User;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-19T12:23:16-0600",
+    date = "2024-08-12T12:34:05-0600",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 17.0.11 (Oracle Corporation)"
 )
 public class AutoUserMapperImpl implements AutoUserMapper {
@@ -17,12 +17,17 @@ public class AutoUserMapperImpl implements AutoUserMapper {
             return null;
         }
 
-        UserDto userDto = new UserDto();
+        Long id = null;
+        String firstName = null;
+        String lastName = null;
+        String email = null;
 
-        userDto.setId( user.getId() );
-        userDto.setFirstName( user.getFirstName() );
-        userDto.setLastName( user.getLastName() );
-        userDto.setEmail( user.getEmail() );
+        id = user.getId();
+        firstName = user.getFirstName();
+        lastName = user.getLastName();
+        email = user.getEmail();
+
+        UserDto userDto = new UserDto( id, firstName, lastName, email );
 
         return userDto;
     }
@@ -35,10 +40,10 @@ public class AutoUserMapperImpl implements AutoUserMapper {
 
         User user = new User();
 
-        user.setId( userDto.getId() );
-        user.setFirstName( userDto.getFirstName() );
-        user.setLastName( userDto.getLastName() );
-        user.setEmail( userDto.getEmail() );
+        user.setId( userDto.id() );
+        user.setFirstName( userDto.firstName() );
+        user.setLastName( userDto.lastName() );
+        user.setEmail( userDto.email() );
 
         return user;
     }

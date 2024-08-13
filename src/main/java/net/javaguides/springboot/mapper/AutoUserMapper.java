@@ -5,10 +5,9 @@ import net.javaguides.springboot.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
-
+//Anotacion para hacer el mapper en automatico
 @Mapper
 public interface AutoUserMapper {
-
     AutoUserMapper MAPPER= Mappers.getMapper(AutoUserMapper.class);
 
     UserDto mapToUserDto(User user);
