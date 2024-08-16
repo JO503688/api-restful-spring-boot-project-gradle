@@ -59,7 +59,8 @@ public class UserController {
     @GetMapping("{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable("id") Long userId){
         UserDto user = userService.getUserByID(userId);
-        System.out.println("User:" + user.getId());
+        //----->System.out.println("User:" + user.getId());
+        System.out.println("User:" + user.id());
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
@@ -94,8 +95,18 @@ public class UserController {
     @PutMapping("{id}")
     public ResponseEntity<UserDto> updateUser( @PathVariable("id") Long userId,
                                            @RequestBody @Valid UserDto user){
-        user.setId(userId);
-        UserDto updatedUser=userService.updateUser(user);
+        //----->user.setId(userId);
+
+        // Crear un nuevo objeto UserDto pasandole id y los nuevos datos
+        //Es necesario pasar en el body y en la URL el id?
+        UserDto updatedUserDto = new UserDto(
+                userId,                // Se establece el id (userId)
+                user.firstName(),      // Obtenemos los valores del objeto UserDTO user
+                user.lastName(),
+                user.email()
+        );
+
+        UserDto updatedUser=userService.updateUser(updatedUserDto);
         return new ResponseEntity<>(updatedUser,HttpStatus.OK);
     }
 

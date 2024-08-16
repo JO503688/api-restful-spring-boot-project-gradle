@@ -26,7 +26,9 @@ public class UserServiceImpl implements UserService {
         // Convert UserDto into User JPA ENTITY
         //User user= UserMapper.mapToUser(userDto);
         //User user= modelMapper.map(userDto,User.class);
-        Optional<User> optionalUser = userRepository.findByEmail(userDto.getEmail());
+
+        //Optional<User> optionalUser = userRepository.findByEmail(userDto.getEmail());
+        Optional<User> optionalUser = userRepository.findByEmail(userDto.email());
         if(optionalUser.isPresent()){
             throw new EmailAlreadyExistsException("Email Already exists for User");
 
@@ -67,13 +69,21 @@ public class UserServiceImpl implements UserService {
     public UserDto updateUser(UserDto user) {
 
         //User existingUser = userRepository.findById(user.getId()).get();
-        User existingUser = userRepository.findById(user.getId()).orElseThrow(
-                () -> new ResourceNotFoundException("User", "id", user.getId())
+
+        //User existingUser = userRepository.findById(user.getId()).orElseThrow(
+        //        () -> new ResourceNotFoundException("User", "id", user.getId())
+        //);
+        User existingUser = userRepository.findById(user.id()).orElseThrow(
+                () -> new ResourceNotFoundException("User", "id", user.id())
         );
 
-        existingUser.setFirstName(user.getFirstName());
-        existingUser.setLastName(user.getLastName());
-        existingUser.setEmail(user.getEmail());
+        //existingUser.setFirstName(user.getFirstName());
+        //existingUser.setLastName(user.getLastName());
+        //existingUser.setEmail(user.getEmail());
+
+        existingUser.setFirstName(user.firstName());
+        existingUser.setLastName(user.lastName());
+        existingUser.setEmail(user.email());
         User updatedUser=userRepository.save(existingUser);
         //return UserMapper.mapToUserDto(updatedUser);
         //return modelMapper.map(updatedUser, UserDto.class);
